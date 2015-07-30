@@ -1,0 +1,2 @@
+toilet figlet
+python-pip
