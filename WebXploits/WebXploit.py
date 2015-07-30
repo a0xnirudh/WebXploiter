@@ -37,8 +37,10 @@ class WebXploit():
 def main():
     webxpoit = WebXploit()
 
-    parser = argparse.ArgumentParser(description='Do a basic Recon for Web')
+    parser = argparse.ArgumentParser(description=
+                                     'Do a basic Recon for Web challenges')
     parser.add_argument('-u', '-url', type=str, help='Target URL to Recon')
+    parser.add_argument('-o', '-out', type=str, help='Filename to save output')
     args = parser.parse_args()
 
     webxpoit.launch()

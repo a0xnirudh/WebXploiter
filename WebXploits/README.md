@@ -4,7 +4,7 @@ This is a basic version of WebXploiter. As of now, it will do a basic Recon and 
 
 Usage:
 ------
-`
+```
 WebXploit.py [-h] [-u U] [-o O]
 
 Do a basic Recon for Web challenges
@@ -13,13 +13,13 @@ optional arguments:
   -h, --help    show this help message and exit
   -u U, -url U  Target URL to Recon
   -o O, -out O  Filename to save output
-`
+````
 
 Sample Output:
 --------------
 A sample output against localhost:
 
-`
+```
 python WebXploit.py -u http://localhost/challs/action.php
 
 m     m        #      m    m        ""#             "      m
@@ -56,7 +56,7 @@ lol                    : this+is+another+test
 Robots.txt Analysis:
 
 test
-`
+```
 Contribute:
 -----------
 
