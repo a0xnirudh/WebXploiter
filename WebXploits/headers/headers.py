@@ -10,6 +10,11 @@ class Headers():
         self.target_host = ""
         self.target_port = ""
 
+    def execute_all_func(self, target):
+        self.parse_target(target)
+        self.get_headers(target)
+        self.get_robots_txt(target)
+
     def parse_target(self, target):
         self.target_url = target
         flag = urlparse(target)
