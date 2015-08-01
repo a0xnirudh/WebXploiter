@@ -40,12 +40,17 @@ def main():
                                      'Do a basic Recon for Web challenges')
     parser.add_argument('-u', '-url', type=str, help='Target URL to Recon')
     parser.add_argument('-o', '-out', type=str, help='Filename to save output')
+    parser.add_argument('-a', '-all', help="Try all possible attacks",
+                        action="store_true")
     args = parser.parse_args()
 
     webxpoit.launch()
     webxpoit.get_headers(args.u)
     webxpoit.get_cookies(args.u)
     webxpoit.execute_random_vulns(args.u)
+    if args.a:
+        webxpoit.headers.header_injection(args.u)
+        webxpoit.cookies.cookie_err_injection(args.u)
 
 if __name__ == '__main__':
     main()

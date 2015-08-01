@@ -2,6 +2,7 @@ import base64
 import binascii
 import requests
 from termcolor import colored
+from attack import Attack
 __author__ = 'Anirudh Anand (a0xnirudh)'
 
 
@@ -9,6 +10,7 @@ class Cookies():
     """ """
     def __init__(self):
         self.cookies = ""
+        self.attack = Attack()
 
     def execute_all_func(self, target):
         self.get_cookies(target)
@@ -35,3 +37,6 @@ class Cookies():
 
             except binascii.Error:
                 continue
+
+    def cookie_err_injection(self, target):
+        self.attack.check_cookies(target)
