@@ -1,4 +1,4 @@
-WebXploiter V1.0
+WebXploiter V0.1
 ================
 This is a basic version of WebXploiter. As of now, it will do a basic Recon and print the results back.
 
