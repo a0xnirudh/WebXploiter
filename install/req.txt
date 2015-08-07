@@ -1,2 +1,5 @@
 toilet figlet
 python-pip
+python-dev
+libffi-dev
+libssl-dev

@@ -41,3 +41,6 @@ class Headers(Attack):
 
     def header_injection(self, target):
         self.attacks.check_user_agent(target)
+
+    def crlf_injection(self, target):
+        self.attacks.crlf_injection(target)

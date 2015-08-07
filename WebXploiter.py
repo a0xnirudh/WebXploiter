@@ -42,15 +42,26 @@ def main():
     parser.add_argument('-o', '-out', type=str, help='Filename to save output')
     parser.add_argument('-a', '-all', help="Try all possible attacks",
                         action="store_true")
+    parser.add_argument('-crlf', help="Testing for CRLF Injections",
+                        action="store_true")
     args = parser.parse_args()
+
+    if not args.u:
+        print "No URL specified.\npython WebXploiter.py -h for help"
+        exit(0)
 
     webxpoit.launch()
     webxpoit.get_headers(args.u)
     webxpoit.get_cookies(args.u)
     webxpoit.execute_random_vulns(args.u)
+
     if args.a:
         webxpoit.headers.header_injection(args.u)
         webxpoit.cookies.cookie_err_injection(args.u)
+        webxpoit.headers.crlf_injection(args.u)
+
+    if args.crlf:
+        webxpoit.headers.crlf_injection(args.u)
 
 if __name__ == '__main__':
     main()

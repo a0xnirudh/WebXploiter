@@ -1,5 +1,6 @@
 import re
 import urllib2
+import requests
 from termcolor import colored
 
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
@@ -21,7 +22,25 @@ class Attack():
                 for line in re.finditer(check[j], flag):
                     print "======================================================="
                     print "Possible Attack: \n"
-                    print colored("POC: " + user_agent['User-agent'], "red")
                     print "Error Based SQL Injection (User-Agent)"
+                    print colored("POC: " + user_agent['User-agent'], "red")
                     print "Refer: http://resources.infosecinstitute.com/sql-injection-http-headers/ \n"
                     return
+
+    def crlf_injection(self, target):
+        payload = open('fuzzdatabase/crlf_injection_fuzzer.txt', 'r')
+        if (target[:-1].endswith('/')) == False:
+            target += "/"
+        flag = requests.get(target)
+        for i in payload.readlines()[1:]:
+            req = requests.get(target + i)
+            if req.text == flag.text:
+                continue
+            status = req.status_code
+            if status != 404 and status != 403 and status != 401:
+                print "======================================================="
+                print "Possible Attack: \n"
+                print "CRLF header Injection"
+                print colored("POC: " + target + i + " is giving statuscode:" +
+                              str(req.status_code))
+        return

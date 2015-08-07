@@ -14,7 +14,7 @@ class Random():
     def websocket_tester(self, target):
         req = requests.get(target)
         check = ["ws://", "wss://", "WebSocket"]
-        flag = str(req.text)
+        flag = str(req.text.encode('ascii', 'ignore'))
         for i in range(0, len(check)):
             for line in re.finditer(check[i], flag):
                 print "======================================================="
