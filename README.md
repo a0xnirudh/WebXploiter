@@ -4,19 +4,22 @@ This is a basic version of WebXploiter. As of now, it will do a basic Recon and 
 
 Install:
 -------
-Just run `python install.py` from install directory. Rest is taken care of :) 
+Just run `python install.py` from install directory. Rest is taken care of :)
 
 Usage:
 ------
 ```
-WebXploit.py [-h] [-u U] [-o O]
+usage: WebXploiter.py [-h] [-u U] [-a] [-A1] [-A3]
 
 Do a basic Recon for Web challenges
 
 optional arguments:
   -h, --help    show this help message and exit
   -u U, -url U  Target URL to Recon
-  -o O, -out O  Filename to save output
+  -a, -all      Try all possible attacks
+  -A1           Test for only Injection Attacks
+  -A3           Test for only XSS Attacks
+
 ````
 
 Sample Output:
@@ -24,7 +27,7 @@ Sample Output:
 A sample output against localhost:
 
 ```
-python WebXploit.py -u http://localhost/challs/action.php
+python WebXploiter.py -u "http://localhost/challs/action.php" -a
 
 m     m        #      m    m        ""#             "      m
 #  #  #  mmm   #mmm    #  #  mmmm     #     mmm   mmm    mm#mm
@@ -45,23 +48,42 @@ m     m        #      m    m        ""#             "      m
 Response Headers:
 
 x-powered-by           : PHP/5.5.9-1ubuntu4.11
-set-cookie             : PHPSESID=This+is+your+cookie, lol=this+is+another+test
+set-cookie             : lol=bG9sCg%3D%3D, PHPSESID=44705989020
 keep-alive             : timeout=5, max=100
 server                 : Apache/2.4.7 (Ubuntu)
 connection             : Keep-Alive
-date                   : Thu, 30 Jul 2015 11:51:16 GMT
+date                   : Fri, 07 Aug 2015 18:13:27 GMT
 content-type           : text/html
-===============================================================
-Cookies:
-
-PHPSESID               : This+is+your+cookie
-lol                    : this+is+another+test
 ===============================================================
 Robots.txt Analysis:
 
 test
+
+===============================================================
+Cookies:
+
+PHPSESID               : 20639818163
+lol                    : bG9sCg%3D%3D
+
+Base64 Encoded Cookies: (Attention!)
+lol                    : lol
+
+=======================================================
+Possible Attack:
+
+POC: lol: bG9sCg%3D%3D'
+Error Based SQL Injection (Cookie Based)
+Refer: https://www.exploit-db.com/docs/33253.pdf
+
+=======================================================
+Possible Attack:
+
+Error Based SQL Injection (User-Agent)
+POC: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0'
+
+Refer: http://resources.infosecinstitute.com/sql-injection-http-headers/
 ```
 Contribute:
 -----------
 
-If you have any feature requests or came across any bugs, do add a new [issue](https://github.com/a0xnirudh/bi0s-CTF-Scripts/issues) or give a pull request ;)
+If you have any feature requests or came across any bugs, do add a new [issue](https://github.com/team-bi0s/WebXploiter/issues) or give a pull request ;)

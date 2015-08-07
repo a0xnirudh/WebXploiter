@@ -5,7 +5,7 @@ import requests
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
 
-class Random():
+class Others():
     # def __init__(self):
 
     def execute_all_func(self, target):

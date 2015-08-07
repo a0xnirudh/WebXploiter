@@ -6,9 +6,33 @@ from termcolor import colored
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
 
-class Attack():
+class Sql_injection():
     def __init__(self):
         pass
+
+    def execute_all_func(self, target):
+        self.check_cookies(target)
+        self.check_user_agent(target)
+        return
+
+    def check_cookies(self, target):
+        session = requests.Session()
+        req = session.get(target)
+        payload = open('fuzzdatabase/error_sql.txt', 'r')
+        check = ["MySQL server version", "have an error", "SQL syntax"]
+        for i in payload.readlines():
+            i = i.strip("\n")
+            for cookie in session.cookies:
+                cookie.value += i
+                r = session.get(target)
+                for j in range(0, len(check)):
+                    if check[j] in r.text:
+                        print "======================================================="
+                        print "Possible Attack: \n"
+                        print colored("POC: " + cookie.name + ": " + cookie.value, "red")
+                        print "Error Based SQL Injection (Cookie Based)"
+                        print "Refer: https://www.exploit-db.com/docs/33253.pdf \n"
+                        return
 
     def check_user_agent(self, target):
         payload = open('fuzzdatabase/error_sql.txt', 'r')
@@ -26,21 +50,3 @@ class Attack():
                     print colored("POC: " + user_agent['User-agent'], "red")
                     print "Refer: http://resources.infosecinstitute.com/sql-injection-http-headers/ \n"
                     return
-
-    def crlf_injection(self, target):
-        payload = open('fuzzdatabase/crlf_injection_fuzzer.txt', 'r')
-        if (target[:-1].endswith('/')) == False:
-            target += "/"
-        flag = requests.get(target)
-        for i in payload.readlines()[1:]:
-            req = requests.get(target + i)
-            if req.text == flag.text:
-                continue
-            status = req.status_code
-            if status != 404 and status != 403 and status != 401:
-                print "======================================================="
-                print "Possible Attack: \n"
-                print "CRLF header Injection"
-                print colored("POC: " + target + i + " is giving statuscode:" +
-                              str(req.status_code))
-        return

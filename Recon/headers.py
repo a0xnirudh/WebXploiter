@@ -1,14 +1,11 @@
 import requests
 from urlparse import urlparse
 from contextlib import closing
-
-from attack import Attack
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
 
-class Headers(Attack):
+class Headers():
     def __init__(self):
-        self.attacks = Attack()
         self.target_url = ""
         self.target_host = ""
         self.target_port = ""
@@ -38,9 +35,3 @@ class Headers(Attack):
         print "Robots.txt Analysis: \n"
         with closing(requests.get(self.target_host+"/robots.txt")) as stream:
             print stream.text
-
-    def header_injection(self, target):
-        self.attacks.check_user_agent(target)
-
-    def crlf_injection(self, target):
-        self.attacks.crlf_injection(target)
