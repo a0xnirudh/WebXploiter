@@ -21,3 +21,4 @@ class Others():
                 print "Possible Attack: \n"
                 print "Cross-Site WebSocket Hijacking (CSWSH)"
                 print "Might be handy:  http://ironwasp.org/cswsh.html"
+                return
