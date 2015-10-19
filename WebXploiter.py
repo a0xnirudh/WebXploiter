@@ -14,6 +14,8 @@ from Recon.httpmethods import HTTPMethods
 from Modules.A1_injection.sql import Sql_injection
 from Modules.A1_injection.crlf import Crlf_injection
 
+from Modules.A3_xss.clickjacking import Clickjacking
+
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
 
@@ -27,6 +29,8 @@ class WebXploit():
 
         self.sql = Sql_injection()
         self.crlf = Crlf_injection()
+
+        self.clickjacking = Clickjacking()
 
     def launch(self):
         os.system("toilet -F metal WebXploit - Recon")
@@ -66,6 +70,10 @@ def main():
 
     webxpoit.launch()
     webxpoit.get_headers(args.u)
+
+    if args.A3:
+        webxpoit.clickjacking.check_protection(args.u)
+
     webxpoit.get_cookies(args.u)
     webxpoit.get_HTTP_methods(args.u)
 

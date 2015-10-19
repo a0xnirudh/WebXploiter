@@ -1,3 +1,4 @@
 requests
 termcolor
 ndg-httpsclient
+Ghost.py
