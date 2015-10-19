@@ -17,7 +17,7 @@ class Cookies():
     def get_cookies(self, target):
         req = requests.get(target)
         self.cookies = req.cookies.items()
-        print "==============================================================="
+        print "\n==============================================================="
         print "Cookies: \n"
         for name, value in self.cookies:
             length = len(name)

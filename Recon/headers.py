@@ -23,15 +23,15 @@ class Headers():
 
     def get_headers(self, target):
         req = requests.head(self.target_url)
-        print "==============================================================="
+        print "\n==============================================================="
         print "Response Headers: \n"
         for name, value in req.headers.items():
             length = len(name)
-            length = 25 - length
+            length = 50 - length
             print name + ": ".rjust(length) + value
 
     def get_robots_txt(self, target):
-        print "==============================================================="
+        print "\n==============================================================="
         print "Robots.txt Analysis: \n"
         with closing(requests.get(self.target_host+"/robots.txt")) as stream:
             print stream.text

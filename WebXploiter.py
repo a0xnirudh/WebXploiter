@@ -9,10 +9,10 @@ sys.path.append(abs_path+'/')
 from Recon.cookies import Cookies
 from Recon.headers import Headers
 from Recon.others import Others
+from Recon.httpmethods import HTTPMethods
 
 from Modules.A1_injection.sql import Sql_injection
 from Modules.A1_injection.crlf import Crlf_injection
-
 
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
@@ -22,6 +22,7 @@ class WebXploit():
     def __init__(self):
         self.recon_headers = Headers()
         self.recon_cookies = Cookies()
+        self.recon_methods = HTTPMethods()
         self.recon_others = Others()
 
         self.sql = Sql_injection()
@@ -38,6 +39,9 @@ class WebXploit():
 
     def execute_random_vulns(self, target):
         self.recon_others.execute_all_func(target)
+
+    def get_HTTP_methods(self, target):
+        self.recon_methods.test_allowed_methods(target)
 
 
 def main():
@@ -63,6 +67,7 @@ def main():
     webxpoit.launch()
     webxpoit.get_headers(args.u)
     webxpoit.get_cookies(args.u)
+    webxpoit.get_HTTP_methods(args.u)
 
     if args.a:
         args.A1 = True
