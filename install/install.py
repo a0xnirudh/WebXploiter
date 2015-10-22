@@ -11,8 +11,8 @@ class Install():
 
     """
     def __init__(self):
-        self.os_install_tools = "req.txt"
-        self.pip_install_tools = "pip.txt"
+        self.os_install_tools = "install/req.txt"
+        self.pip_install_tools = "install/pip.txt"
 
     def run_command(self, command):
         print "[+] Running the command: %s" % command
