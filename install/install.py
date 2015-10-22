@@ -1,4 +1,5 @@
 import os
+from os import path
 
 __author__ = 'Anirudh Anand (a0xnirudh)'
 
@@ -11,20 +12,26 @@ class Install():
 
     """
     def __init__(self):
-        self.os_install_tools = "install/req.txt"
-        self.pip_install_tools = "install/pip.txt"
+        self.os_install_tools = "req.txt"
+        self.pip_install_tools = "pip.txt"
 
     def run_command(self, command):
         print "[+] Running the command: %s" % command
         os.system(command)
 
     def install_pip_tools(self):
-        install_file = open(self.pip_install_tools, "r")
+        try:
+            install_file = open(self.pip_install_tools, "r")
+        except IOError:
+            install_file = open("install/" + self.pip_install_tools, "r")
         for i in install_file.readlines():
             self.run_command("sudo -E pip install --upgrade " + i)
 
     def install_os_tools(self):
-        install_file = open(self.os_install_tools, "r")
+        try:
+            install_file = open(self.os_install_tools, "r")
+        except IOError:
+            install_file = open("install/" + self.os_install_tools, "r")
         for i in install_file.readlines():
             self.run_command("sudo apt-get install " + i)
 
