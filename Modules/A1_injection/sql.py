@@ -18,7 +18,7 @@ class Sql_injection():
     def check_cookies(self, target):
         session = requests.Session()
         req = session.get(target)
-        payload = open('fuzzdatabase/error_sql.txt', 'r')
+        payload = open('Fuzzdatabase/error_sql.txt', 'r')
         check = ["MySQL server version", "have an error", "SQL syntax"]
         for i in payload.readlines():
             i = i.strip("\n")
@@ -35,7 +35,7 @@ class Sql_injection():
                         return
 
     def check_user_agent(self, target):
-        payload = open('fuzzdatabase/error_sql.txt', 'r')
+        payload = open('Fuzzdatabase/error_sql.txt', 'r')
         for i in payload.readlines():
             user_agent = {'User-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0'}
             user_agent['User-agent'] += i

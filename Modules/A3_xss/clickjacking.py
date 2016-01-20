@@ -13,7 +13,7 @@ class Clickjacking():
         req = requests.get(target)
         try:
             xframe = req.headers['x-frame-options']
-            print 'X-FRAME-OPTIONS:', xframe, ' - Clickjacking not possible'
+            print '\nX-FRAME-OPTIONS:', xframe, ' - Clickjacking not possible'
         except:
             print "\n======================================================="
             print "Possible Attack: \n"

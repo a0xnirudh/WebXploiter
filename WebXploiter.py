@@ -70,10 +70,6 @@ def main():
 
     webxpoit.launch()
     webxpoit.get_headers(args.u)
-
-    if args.A3:
-        webxpoit.clickjacking.check_protection(args.u)
-
     webxpoit.get_cookies(args.u)
     webxpoit.get_HTTP_methods(args.u)
 
@@ -85,6 +81,9 @@ def main():
     if args.A1:
         webxpoit.sql.execute_all_func(args.u)
         webxpoit.crlf.test_crlf_injection(args.u)
+
+    if args.A3:
+        webxpoit.clickjacking.check_protection(args.u)
 
 if __name__ == '__main__':
     main()

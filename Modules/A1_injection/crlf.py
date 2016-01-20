@@ -1,16 +1,19 @@
-import re
+import os
+import sys
 import requests
-from termcolor import colored
+"""For appending the directory path"""
+sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from Print.printer import Print
 
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
 
 class Crlf_injection():
     def __init__(self):
-        pass
+        self.Print = Print()
 
     def test_crlf_injection(self, target):
-        payload = open('fuzzdatabase/crlf_injection_fuzzer.txt', 'r')
+        payload = open('Fuzzdatabase/crlf_injection_fuzzer.txt', 'r')
         if (target[:-1].endswith('/')) == False:
             target += "/"
         flag = requests.get(target)
@@ -20,9 +23,6 @@ class Crlf_injection():
                 continue
             status = req.status_code
             if status != 404 and status != 403 and status != 401 and status != 400:
-                print "======================================================="
-                print "Possible Attack: \n"
                 print "CRLF header Injection"
-                print colored("POC: " + target + i + " is giving statuscode:" +
-                              str(req.status_code), "red")
+                poc = "POC: " + target + i + " is giving statuscode:" + str(req.status_code)
         return

@@ -1,15 +1,18 @@
+import os
+import sys
 import requests
-from termcolor import colored
-
+"""For appending the directory path"""
+sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from Print.printer import Print
+__author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
 class HTTPMethods():
 
     def __init__(self):
-        self.verbs = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'TRACE']
+        self.Print = Print()
+        self.verbs = ['GET', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE']
 
     def test_allowed_methods(self, target):
-        print "\n==============================================================="
-        print "HTTP Methods:"
         for verb in self.verbs:
             req = requests.request(verb, target)
             print verb, req.status_code, req.reason
