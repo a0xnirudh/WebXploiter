@@ -1,5 +1,5 @@
 import os
-
+import sys
 __author__ = 'Anirudh Anand (a0xnirudh)'
 
 
@@ -11,8 +11,9 @@ class Install():
 
     """
     def __init__(self):
-        self.os_install_tools = "req.txt"
-        self.pip_install_tools = "pip.txt"
+        self.file_location = os.path.abspath(os.path.dirname(__file__))
+        self.os_install_tools = self.file_location + "/req.txt"
+        self.pip_install_tools = self.file_location + "/pip.txt"
 
     def run_command(self, command):
         print "[+] Running the command: %s" % command
