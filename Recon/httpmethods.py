@@ -26,6 +26,6 @@ class HTTPMethods():
             except requests.exceptions.ConnectionError as e:
                 print("CONNECT :: Connection error occured. Retry using https")
                 self.logger.error_log(e)
-                #test = LoggingManager()
-                #test2 = test.create_logger('test_log','test_log.log')
-                #test2.exception(e)
+            except Exception as e:
+                self.logger.error_log(e)
+                print("Error while testing allowed methords. Check error log")

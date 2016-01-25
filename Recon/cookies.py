@@ -7,6 +7,7 @@ import requests
 sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
                 '..')))
 from Print.printer import Print
+from Modules.loggingManager.logging_manager import LoggingManager
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
 
@@ -15,6 +16,7 @@ class Cookies():
     def __init__(self):
         self.cookies = ""
         self.Print = Print()
+        self.logger = LoggingManager()
 
     def execute_all_func(self, target):
         self.get_cookies(target)
@@ -22,8 +24,12 @@ class Cookies():
 
     def get_cookies(self, target):
         data = ""
-        req = requests.get(target)
-        self.cookies = req.cookies.items()
+        try:
+            req = requests.get(target)
+            self.cookies = req.cookies.items()
+        except Exception as e:
+            print("Error occured while accessing cookies. Check error log")
+            self.logger.error_log(e)
         for name, value in self.cookies:
             length = len(name)
             length = 25 - length
@@ -38,5 +44,5 @@ class Cookies():
                 length = 25 - length
                 data = name + ": ".rjust(length) + flag
                 self.Print.printer(1, "Base64 Encoded Cookies: (Attention!)", data)
-            except binascii.Error:
+            except binascii.Error as e:
                 continue

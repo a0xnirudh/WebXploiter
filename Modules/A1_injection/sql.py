@@ -7,6 +7,7 @@ import requests
 sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
                 '../..')))
 from Print.printer import Print
+from Modules.loggingManager.logging_manager import LoggingManager
 
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
@@ -14,12 +15,21 @@ __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 class Sql_injection():
     def __init__(self):
         self.Print = Print()
+        self.logger = LoggingManager()
         self.filepath = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                         '../..'))
 
     def execute_all_func(self, target):
-        self.check_cookies(target)
-        self.check_user_agent(target)
+        try:
+            self.check_cookies(target)
+        except Exception as e:
+            print("Error while checking cookies.Check error log for details")
+            logger.error_log(e)
+        try:
+            self.check_user_agent(target)
+        except Exception as e:
+            print("Error while checking user agent.Check error log for details.")
+            logger.error_log(e)
         return
 
     def check_cookies(self, target):

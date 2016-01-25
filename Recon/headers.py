@@ -7,12 +7,14 @@ from contextlib import closing
 sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
                 '..')))
 from Print.printer import Print
+from Modules.loggingManager.logging_manager import LoggingManager
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
 
 class Headers():
     def __init__(self):
         self.Print = Print()
+        self.logger = LoggingManager()
 
     def execute_all_func(self, target):
         self.get_headers(target)
@@ -20,7 +22,16 @@ class Headers():
 
     def get_headers(self, target):
         data = ""
-        req = requests.head(target)
+        try:
+            req = requests.head(target)
+        except requests.exceptions.MissingSchema as e:
+            print("Non valid URL. Please specify a valid URL.")
+            self.logger.error_log(e)
+            exit()
+        except Exception as e:
+            print("Error occured while accessing headers.Check error log")
+            self.logger.error_log(e)
+            exit()
         for name, value in req.headers.items():
             length = len(name)
             length = 50 - length

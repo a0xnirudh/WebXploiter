@@ -1,6 +1,12 @@
 import os
 import sys
+
+sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
+                '..')))
+
 __author__ = 'Anirudh Anand (a0xnirudh)'
+
+from Modules.loggingManager.logging_manager import LoggingManager
 
 
 class Install():
@@ -31,10 +37,20 @@ class Install():
 
 
 def main():
+    logger=LoggingManager()
     install = Install()
-    install.install_os_tools()
-    install.install_pip_tools()
-
+    try:
+        install.install_os_tools()
+    except Exception as e:
+        logger.install_log(e)
+        print("Error while installing os tools. Check install log.")
+        exit()
+    try:
+        install.install_pip_tools()
+    except Exception as e:
+        logger.install_log(e)
+        print("Error while installing python pip tools. Check install log.")
+        exit()
 
 if __name__ == '__main__':
     main()

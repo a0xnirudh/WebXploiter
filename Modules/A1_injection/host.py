@@ -6,12 +6,13 @@ from requests.exceptions import SSLError, ConnectionError
 sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
                 '../..')))
 from Print.printer import Print
-
+from Modules.loggingManager.logging_manager import LoggingManager
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
 
 class Host_injection():
     def __init__(self):
+        self.logger = LoggingManager()
         self.Print = Print()
 
     def host_header_inj(self, target):
@@ -33,10 +34,15 @@ class Host_injection():
                     self.Print.printer(1, "Host Header injection",
                                        target, req.status_code)
 
-        except SSLError:
+        except SSLError as e:
             self.Print.printer(1, "Host Header injection: Manual check needed",
                                target, req.status_code)
 
         except ConnectionError:
             self.Print.printer(1, "Host Header injection: ConnectionError",
                                target, req.status_code)
+
+        except Exception as e:
+            self.logger.error_log(e)
+            print("Error occured while checking host header injection. Check
+                  error log for details")
