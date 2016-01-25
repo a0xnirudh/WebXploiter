@@ -3,10 +3,6 @@ import sys
 import argparse
 import requests
 from urlparse import urlparse
-"""For appending the directory path"""
-abs_path = os.path.abspath(os.path.dirname(__file__))
-sys.path.append(abs_path+'/')
-
 from Recon.cookies import Cookies
 from Recon.headers import Headers
 from Recon.others import Others
@@ -17,6 +13,10 @@ from Modules.A1_injection.sql import Sql_injection
 from Modules.A1_injection.crlf import Crlf_injection
 
 from Modules.A3_xss.clickjacking import Clickjacking
+
+"""For appending the directory path"""
+abs_path = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(abs_path+'/')
 
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
