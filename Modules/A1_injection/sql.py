@@ -3,7 +3,6 @@ import re
 import sys
 import urllib2
 import requests
-from termcolor import colored
 """For appending the directory path"""
 sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
                 '../..')))
