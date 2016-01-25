@@ -1,0 +1,31 @@
+2016-01-25 15:56:55,181 - error_log - ERROR - ('Connection aborted.', BadStatusLine("''",))
+Traceback (most recent call last):
+  File "/home/testify/Documents/Project/WebXploiter/Recon/httpmethods.py", line 21, in test_allowed_methods
+    req = requests.request(verb, target)
+  File "/usr/local/lib/python2.7/dist-packages/requests/api.py", line 53, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/requests/sessions.py", line 468, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/requests/sessions.py", line 576, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/requests/adapters.py", line 426, in send
+    raise ConnectionError(err, request=request)
+ConnectionError: ('Connection aborted.', BadStatusLine("''",))
+2016-01-25 16:03:05,863 - error_log - ERROR - 'NoneType' object has no attribute 'find'
+Traceback (most recent call last):
+  File "WebXploiter.py", line 44, in parse_target
+    flag = urlparse(target)
+  File "/usr/lib/python2.7/urlparse.py", line 143, in urlparse
+    tuple = urlsplit(url, scheme, allow_fragments)
+  File "/usr/lib/python2.7/urlparse.py", line 182, in urlsplit
+    i = url.find(':')
+AttributeError: 'NoneType' object has no attribute 'find'
+2016-01-25 16:03:25,473 - error_log - ERROR - 'NoneType' object has no attribute 'find'
+Traceback (most recent call last):
+  File "WebXploiter.py", line 44, in parse_target
+    flag = urlparse(target)
+  File "/usr/lib/python2.7/urlparse.py", line 143, in urlparse
+    tuple = urlsplit(url, scheme, allow_fragments)
+  File "/usr/lib/python2.7/urlparse.py", line 182, in urlsplit
+    i = url.find(':')
+AttributeError: 'NoneType' object has no attribute 'find'

@@ -11,7 +11,7 @@ from Recon.info_disclosure import Info_disclosure
 
 from Modules.A1_injection.sql import Sql_injection
 from Modules.A1_injection.crlf import Crlf_injection
-
+from Modules.loggingManager.logging_manager import LoggingManager
 from Modules.A3_xss.clickjacking import Clickjacking
 
 """For appending the directory path"""
@@ -39,10 +39,15 @@ class WebXploit():
         self.clickjacking = Clickjacking()
 
     def parse_target(self, target):
-        self.target_url = target
-        flag = urlparse(target)
-        self.target_host = flag.scheme + "://" + flag.netloc
-        self.target_port = flag.port
+        try:
+            self.target_url = target
+            flag = urlparse(target)
+            self.target_host = flag.scheme + "://" + flag.netloc
+            self.target_port = flag.port
+        except Exception as e:
+            #print("No valid argument. See -h for help")
+            logger = LoggingManager()
+            logger.error_log(e)
 
     def launch(self):
         os.system("toilet -F metal WebXploit - Recon")
