@@ -16,7 +16,7 @@ class Crlf_injection():
                                         '../..'))
 
     def test_crlf_injection(self, target):
-        payload = open(self.filepath + '/Fuzzdatabase/crlf_injection_fuzzer.txt', 'r')
+        payload = open(self.filepath + '/Fuzzdatabase/crlf_fuzzer.txt', 'r')
         if (target[:-1].endswith('/')) == False:
             target += "/"
         flag = requests.get(target)
@@ -25,7 +25,8 @@ class Crlf_injection():
             if req.text == flag.text:
                 continue
             status = req.status_code
-            if status != 404 and status != 403 and status != 401 and status != 400:
-                print "CRLF header Injection"
-                poc = "POC: " + target + i + " is giving statuscode:" + str(req.status_code)
+            if status != 404 and status != 403 and status != 400:
+                poc = "POC: " + target + i
+                self.Print.printer(1, "CRLF header Injection",
+                                   data, status, poc)
         return

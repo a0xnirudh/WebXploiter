@@ -7,12 +7,14 @@ from termcolor import colored
 """For appending the directory path"""
 sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
                 '../..')))
+from Print.printer import Print
 
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
 
 class Sql_injection():
     def __init__(self):
+        self.Print = Print()
         self.filepath = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                         '../..'))
 
@@ -33,26 +35,23 @@ class Sql_injection():
                 r = session.get(target)
                 for j in range(0, len(check)):
                     if check[j] in r.text:
-                        print "======================================================="
-                        print "Possible Attack: \n"
-                        print colored("POC: " + cookie.name + ": " + cookie.value, "red")
-                        print "Error Based SQL Injection (Cookie Based)"
-                        print "Refer: https://www.exploit-db.com/docs/33253.pdf \n"
+                        poc = "POC: " + cookie.name + ": " + cookie.value
+                        self.Print.printer(1, "Error Based SQLi(Cookie Based)",
+                                           data, req.status_code, poc)
                         return
 
     def check_user_agent(self, target):
         payload = open(self.filepath + '/Fuzzdatabase/error_sql.txt', 'r')
         for i in payload.readlines():
-            user_agent = {'User-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0'}
+            user_agent = {'User-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux' +
+                          'x86_64; rv:39.0) Gecko/20100101 Firefox/39.0'}
             user_agent['User-agent'] += i
             req = urllib2.Request(target, headers=user_agent)
             flag = str(urllib2.urlopen(req).read())
             check = ["MySQL server version", "have an error", "SQL syntax"]
             for j in range(0, len(check)):
                 for line in re.finditer(check[j], flag):
-                    print "======================================================="
                     print "Possible Attack: \n"
                     print "Error Based SQL Injection (User-Agent)"
                     print colored("POC: " + user_agent['User-agent'], "red")
-                    print "Refer: http://resources.infosecinstitute.com/sql-injection-http-headers/ \n"
                     return

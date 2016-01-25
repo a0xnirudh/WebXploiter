@@ -3,7 +3,8 @@ import sys
 import requests
 from contextlib import closing
 """For appending the directory path"""
-sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
+                '..')))
 from Print.printer import Print
 __author__ = "AnirudhAnand <anirudh.anand@owasp.org>"
 

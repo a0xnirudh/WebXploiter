@@ -4,7 +4,8 @@ import base64
 import binascii
 import requests
 """For appending the directory path"""
-sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
+                '..')))
 from Print.printer import Print
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 

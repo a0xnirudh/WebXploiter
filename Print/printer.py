@@ -1,13 +1,14 @@
 __author__ = 'a0xnirudh'
 
+
 class Print():
 
     def __init__(self):
         pass
 
-    def printer(self,main, name, data, status=None, poc=None):
+    def printer(self, main, name, data, status=None, poc=None):
         if main:
-            print "\n==============================================================="
+            print "\n========================================================="
         print name + "\n"
         if data:
             print data + "\n"
