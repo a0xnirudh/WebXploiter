@@ -83,7 +83,25 @@ POC: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.
 
 Refer: http://resources.infosecinstitute.com/sql-injection-http-headers/
 ```
+
+Vulnerability Analysis:
+-----------------------
+1. Reconnaissance:
+    * HTTP Header checks
+    * HTTP enabled methods check (Cross Site Tracing)
+    * Robots.txt/.htaccess/.svn information disclosure checks
+    * Cookie checks (decodes base64 automatically)
+
+2. Injection Attacks:
+    * Error based SQL injection:
+        * Cookie based
+        * User-Agent based
+
+    * CRLF injection:
+        * CRLF tests on main URLs
+
+
 Contribute:
 -----------
 
-If you have any feature requests or came across any bugs, do add a new [issue](https://github.com/team-bi0s/WebXploiter/issues) or give a pull request ;)
+If you have any feature requests or came across any bugs, do add a new [issue](https://github.com/a0xnirudh/WebXploiter/issues) or give a pull request ;)
