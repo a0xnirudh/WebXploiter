@@ -89,10 +89,15 @@ Vulnerability Analysis:
 1. Reconnaissance:
     * HTTP Header checks
     * HTTP enabled methods check (Cross Site Tracing)
-    * Robots.txt/.htaccess/.svn information disclosure checks
     * Cookie checks (decodes base64 automatically)
 
-2. Injection Attacks:
+2. Information Disclosure:
+    * Robots.txt Analysis
+    * .htaccess public access check
+    * .svn/entries public access check
+    * Microsoft IIS, internal IP disclosure check
+
+3. Injection Attacks:
     * Error based SQL injection:
         * Cookie based
         * User-Agent based
@@ -100,6 +105,13 @@ Vulnerability Analysis:
     * CRLF injection:
         * CRLF tests on main URLs
 
+    * Host header injection:
+        * Modifying `Host` header
+        * Adding `X-Forwarded-Host` additional header
+
+4. Clickjacking:
+    * `X-FRAME-OPTIONS` header check
+    * Frame busting checks
 
 Contribute:
 -----------
