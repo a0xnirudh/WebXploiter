@@ -2,7 +2,8 @@ import os
 import sys
 import requests
 """For appending the directory path"""
-sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
+                '../..')))
 from Print.printer import Print
 
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
@@ -11,9 +12,11 @@ __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 class Crlf_injection():
     def __init__(self):
         self.Print = Print()
+        self.filepath = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                        '../..'))
 
     def test_crlf_injection(self, target):
-        payload = open('Fuzzdatabase/crlf_injection_fuzzer.txt', 'r')
+        payload = open(self.filepath + '/Fuzzdatabase/crlf_injection_fuzzer.txt', 'r')
         if (target[:-1].endswith('/')) == False:
             target += "/"
         flag = requests.get(target)
