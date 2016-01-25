@@ -33,7 +33,8 @@ class Clickjacking():
         f = open(html_filename, 'w+')
         f.write(html)
         f.close()
-        log_filename = 'test.log'
+        abs_path = os.path.abspath(os.path.dirname(__file__))
+        log_filename = abs_path+'/../../Logs/'+'Clickjacking.log'
         fh = logging.FileHandler(log_filename)
         ghost = Ghost(log_level=logging.INFO, log_handler=fh)
         with ghost.start() as session:

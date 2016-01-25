@@ -13,6 +13,7 @@ class HTTPMethods():
 
     def __init__(self):
         self.Print = Print()
+        self.logger = LoggingManager()
         self.verbs = ['GET', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE']
 
     def test_allowed_methods(self, target):
@@ -24,8 +25,7 @@ class HTTPMethods():
                     print colored('Possible Cross Site Tracing vulnerability found', 'red')
             except requests.exceptions.ConnectionError as e:
                 print("CONNECT :: Connection error occured. Retry using https")
-                logger = LoggingManager()
-                logger.error_log(e)
+                self.logger.error_log(e)
                 #test = LoggingManager()
                 #test2 = test.create_logger('test_log','test_log.log')
                 #test2.exception(e)

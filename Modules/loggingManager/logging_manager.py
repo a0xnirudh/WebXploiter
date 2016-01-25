@@ -61,6 +61,6 @@ class LoggingManager:
 
         :param exception:   ->  Any additional logging Messages
         """
-        logger = self.create_logger('error_log', 'error.logs')
+        logger = self.create_logger('error_log', 'error.log')
         logger.exception(exception)
         return
