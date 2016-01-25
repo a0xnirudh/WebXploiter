@@ -11,42 +11,23 @@ __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
 class Headers():
     def __init__(self):
-        self.target_url = ""
-        self.target_host = ""
-        self.target_port = ""
         self.Print = Print()
 
     def execute_all_func(self, target):
-        self.parse_target(target)
         self.get_headers(target)
-        self.get_robots_txt(target)
         self.check_headers(target)
-
-    def parse_target(self, target):
-        self.target_url = target
-        flag = urlparse(target)
-        self.target_host = flag.scheme + "://" + flag.netloc
-        self.target_port = flag.port
 
     def get_headers(self, target):
         data = ""
-        req = requests.head(self.target_url)
+        req = requests.head(target)
         for name, value in req.headers.items():
             length = len(name)
             length = 50 - length
             data = data + name + ": ".rjust(length) + value + "\n"
         self.Print.printer(1, "Response Headers: ", data)
 
-    def get_robots_txt(self, target):
-        with closing(requests.get(self.target_host+"/robots.txt")) as stream:
-            data = stream.text
-        self.Print.printer(1, "Robots.txt Analysis: ", data)
-        with closing(requests.get(self.target_host+"/.htaccess")) as stream:
-            data = stream.text
-        self.Print.printer(1, ".htaccess Analysis: ", data)
-
     def check_headers(self, target):
-        req = requests.head(self.target_url)
+        req = requests.head(target)
         print "\n"
         self.Print.printer(1, "Response header Analysis: ", None)
         try:
