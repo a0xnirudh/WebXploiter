@@ -11,9 +11,11 @@ from Recon.info_disclosure import Info_disclosure
 
 from Modules.A1_injection.sql import Sql_injection
 from Modules.A1_injection.crlf import Crlf_injection
-from Modules.loggingManager.logging_manager import LoggingManager
+from Modules.A1_injection.host import Host_injection
+
 from Modules.A3_xss.clickjacking import Clickjacking
 
+from Modules.loggingManager.logging_manager import LoggingManager
 """For appending the directory path"""
 abs_path = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(abs_path+'/')
@@ -35,6 +37,7 @@ class WebXploit():
 
         self.sql = Sql_injection()
         self.crlf = Crlf_injection()
+        self.host = Host_injection()
 
         self.clickjacking = Clickjacking()
 
@@ -105,6 +108,7 @@ def main():
     if args.A1:
         webxpoit.sql.execute_all_func(args.u)
         webxpoit.crlf.test_crlf_injection(args.u)
+        webxploit.host.host_header_inj(args.u)
 
     if args.A3:
         webxpoit.clickjacking.check_protection(args.u)

@@ -1,5 +1,6 @@
 import os
 import sys
+import httplib
 import requests
 from contextlib import closing
 """For appending the directory path"""
@@ -41,3 +42,15 @@ class Info_disclosure:
                 data = stream.text
             self.Print.printer(1, ".htaccess analysis: ", data,
                                req.status_code)
+
+        url = target.split('/')[2]
+        httplib.HTTPSConnection._http_vsn = 10
+        httplib.HTTPSConnection._http_vsn_str = 'HTTP/1.0'
+        req = httplib.HTTPSConnection(url)
+        req.request("GET", "/")
+        response = req.getresponse()
+        if response.getheader('location'):
+            location = response.getheader('Location')
+            pieces = location.split('.')
+            if len(pieces) >= 3:
+                self.Print.printer(1, "Internal IP disclosure", location)
