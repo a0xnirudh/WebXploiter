@@ -23,13 +23,13 @@ class Sql_injection():
         try:
             self.check_cookies(target)
         except Exception as e:
-            print("Error while checking cookies.Check error log for details")
-            logger.error_log(e)
+            print("Error while checking cookies.Check module log for details")
+            self.logger.module_log(e)
         try:
             self.check_user_agent(target)
         except Exception as e:
-            print("Error while checking user agent.Check error log for details.")
-            logger.error_log(e)
+            print("Error while checking user agent.Check module log for details.")
+            self.logger.module_log(e)
         return
 
     def check_cookies(self, target):

@@ -24,9 +24,9 @@ class Others():
             check = ["ws://", "wss://", "WebSocket"]
             flag = str(req.text.encode('ascii', 'ignore'))
         except:
-            print("Error while testing websockets. Check error log for details\
+            print("Error while testing websockets. Check recon log for details\
                   .")
-            self.logger.error_log(e)
+            self.logger.recon_log(e)
         for i in range(0, len(check)):
             for line in re.finditer(check[i], flag):
                 print "======================================================="

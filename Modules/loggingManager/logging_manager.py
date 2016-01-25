@@ -64,3 +64,13 @@ class LoggingManager:
         logger = self.create_logger('error_log', 'error.log')
         logger.exception(exception)
         return
+
+    def recon_log(self,exception=None):
+        logger = self.create_logger('recon_log', 'recon.log')
+        logger.exception(exception)
+        return
+
+    def module_log(self,exception=None):
+        logger = self.create_logger('module_log', 'module.log')
+        logger.exception(exception)
+        return

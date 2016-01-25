@@ -32,7 +32,7 @@ class Crlf_injection():
                         self.Print.printer(1, "CRLF header Injection",
                                            data, status, poc)
         except Exception as e:
-            print("Error occured while checking for crlf injection. Check error\
+            print("Error occured while checking for crlf injection. Check module\
                   log for details")
-            self.logger.error_log(e)
+            self.logger.module_log(e)
         return

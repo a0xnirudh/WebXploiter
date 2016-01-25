@@ -43,6 +43,6 @@ class Host_injection():
                                target, req.status_code)
 
         except Exception as e:
-            self.logger.error_log(e)
-            print("Error occured while checking host header injection. Check
-                  error log for details")
+            self.logger.module_log(e)
+            print("Error occured while checking host header injection. Check\
+                  module log for details")

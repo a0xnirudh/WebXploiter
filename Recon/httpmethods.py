@@ -25,7 +25,7 @@ class HTTPMethods():
                     print colored('Possible Cross Site Tracing vulnerability found', 'red')
             except requests.exceptions.ConnectionError as e:
                 print("CONNECT :: Connection error occured. Retry using https")
-                self.logger.error_log(e)
+                self.logger.recon_log(e)
             except Exception as e:
-                self.logger.error_log(e)
-                print("Error while testing allowed methords. Check error log")
+                self.logger.recon_log(e)
+                print("Error while testing allowed methords. Check recon log")

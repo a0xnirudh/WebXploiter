@@ -29,8 +29,8 @@ class Headers():
             self.logger.error_log(e)
             exit()
         except Exception as e:
-            print("Error occured while accessing headers.Check error log")
-            self.logger.error_log(e)
+            print("Error occured while accessing headers.Check recon log")
+            self.logger.recon_log(e)
             exit()
         for name, value in req.headers.items():
             length = len(name)

@@ -24,7 +24,6 @@ __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
 
 class WebXploit():
-    """ """
     def __init__(self):
         self.target_url = ""
         self.target_port = ""
@@ -48,7 +47,6 @@ class WebXploit():
             self.target_host = flag.scheme + "://" + flag.netloc
             self.target_port = flag.port
         except Exception as e:
-            #print("No valid argument. See -h for help")
             self.logger.error_log(e)
 
     def launch(self):
@@ -64,7 +62,12 @@ class WebXploit():
         self.recon_others.execute_all_func(target)
 
     def check_info_disclosure(self):
-        self.recon_info_dis.check(self.target_host)
+        try:
+            self.recon_info_dis.check(self.target_host)
+        except Exception as e:
+            print("Error while checking information disclosure.Check module log\
+                  ")
+            self.logger.module_log(e)
         if self.target_host != self.target_url:
             self.recon_info_dis.check(self.target_url)
 

@@ -28,8 +28,8 @@ class Cookies():
             req = requests.get(target)
             self.cookies = req.cookies.items()
         except Exception as e:
-            print("Error occured while accessing cookies. Check error log")
-            self.logger.error_log(e)
+            print("Error occured while accessing cookies. Check recon log")
+            self.logger.recon_log(e)
         for name, value in self.cookies:
             length = len(name)
             length = 25 - length
