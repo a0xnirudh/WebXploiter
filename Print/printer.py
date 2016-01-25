@@ -14,4 +14,4 @@ class Print():
         if poc:
             print poc + "\n"
         if status:
-            print "Status code: " + status
+            print "Status code: " + str(status)
