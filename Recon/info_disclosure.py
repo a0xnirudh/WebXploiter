@@ -1,5 +1,6 @@
 import os
 import sys
+import httplib
 import requests
 from contextlib import closing
 """For appending the directory path"""
