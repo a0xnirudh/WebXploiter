@@ -50,7 +50,10 @@ class Info_disclosure:
         response = req.getresponse()
         if response.getheader('location'):
             location = response.getheader('Location')
-            pieces = location.split('.')
-            if len(pieces) >= 3:
+            pieces = location.strip('https://').strip('http://').split('.')
+            if len(pieces) >= 3 and self.hasNumbers(location):
                 self.Print.printer(1, "Internal IP disclosure", location)
         req.close()
+
+    def hasNumbers(self, inputString):
+        return any(char.isdigit() for char in inputString)
