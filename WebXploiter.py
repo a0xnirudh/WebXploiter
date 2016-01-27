@@ -23,11 +23,13 @@ sys.path.append(abs_path+'/')
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
 
+logger=LoggingManager()
+
 class WebXploit():
     def __init__(self):
         self.target_url = ""
         self.target_port = ""
-        self.logger = LoggingManager()
+        self.logger = logger
         self.recon_headers = Headers()
         self.recon_cookies = Cookies()
         self.recon_methods = HTTPMethods()
@@ -117,4 +119,8 @@ def main():
         webxploit.clickjacking.check_protection(args.u)
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception as e:
+        print("Unhandled error occured. Check error log for details")
+        logger.error_log(e)
