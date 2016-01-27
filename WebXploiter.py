@@ -76,7 +76,7 @@ class WebXploit():
 
 
 def main():
-    webxpoit = WebXploit()
+    webxploit = WebXploit()
 
     parser = argparse.ArgumentParser(description=
                                      'Do a basic Recon for Web challenges')
@@ -91,30 +91,30 @@ def main():
 
     args = parser.parse_args()
 
-    webxpoit.parse_target(args.u)
+    webxploit.parse_target(args.u)
 
     if not args.u:
         print "No URL specified.\npython WebXploiter.py -h for help"
         exit(0)
 
-    webxpoit.launch()
-    webxpoit.get_headers(args.u)
-    webxpoit.get_cookies(args.u)
-    webxpoit.get_HTTP_methods(args.u)
-    webxpoit.check_info_disclosure()
+    webxploit.launch()
+    webxploit.get_headers(args.u)
+    webxploit.get_cookies(args.u)
+    webxploit.get_HTTP_methods(args.u)
+    webxploit.check_info_disclosure()
 
     if args.a:
         args.A1 = True
         args.A3 = True
-        webxpoit.recon_others.execute_all_func(args.u)
+        webxploit.recon_others.execute_all_func(args.u)
 
     if args.A1:
-        webxpoit.sql.execute_all_func(args.u)
-        webxpoit.crlf.test_crlf_injection(args.u)
+        webxploit.sql.execute_all_func(args.u)
+        webxploit.crlf.test_crlf_injection(args.u)
         webxploit.host.host_header_inj(args.u)
 
     if args.A3:
-        webxpoit.clickjacking.check_protection(args.u)
+        webxploit.clickjacking.check_protection(args.u)
 
 if __name__ == '__main__':
     main()
