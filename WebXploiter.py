@@ -15,6 +15,9 @@ from Modules.A1_injection.host import Host_injection
 
 from Modules.A3_xss.clickjacking import Clickjacking
 
+from Modules.A9_KSV.rangeHeader import rangeHeader
+
+
 from Modules.loggingManager.logging_manager import LoggingManager
 """For appending the directory path"""
 abs_path = os.path.abspath(os.path.dirname(__file__))
@@ -40,6 +43,7 @@ class WebXploit():
         self.crlf = Crlf_injection()
         self.host = Host_injection()
 
+        self.rangeHeader = rangeHeader()
         self.clickjacking = Clickjacking()
 
     def parse_target(self, target):
@@ -62,6 +66,14 @@ class WebXploit():
 
     def execute_random_vulns(self, target):
         self.recon_others.execute_all_func(target)
+
+    def check_range_header(self, target):
+        try:
+            self.rangeHeader.rangeInjection(target)
+        except Exception as e:
+            print("Error occured while running RangeHeader injection.\
+                  Check module log for errors")
+            self.logger.moduler_log
 
     def check_info_disclosure(self):
         try:
@@ -90,6 +102,8 @@ def main():
                         action="store_true")
     parser.add_argument('-A3', help="Test for only XSS Attacks",
                         action="store_true")
+    parser.add_argument('-A9', help="Test for only known software vulnerabilities",
+                        action="store_true")
 
     args = parser.parse_args()
 
@@ -108,6 +122,7 @@ def main():
     if args.a:
         args.A1 = True
         args.A3 = True
+        args.A9 = True
         webxploit.recon_others.execute_all_func(args.u)
 
     if args.A1:
@@ -117,6 +132,9 @@ def main():
 
     if args.A3:
         webxploit.clickjacking.check_protection(args.u)
+
+    if args.A9:
+        webxploit.check_range_header(args.u)
 
 if __name__ == '__main__':
     try:
