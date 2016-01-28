@@ -69,5 +69,3 @@ class Apache2_tests():
         if req.status_code == 406:
             self.Print.printer(1, "Apache Mod Negotiation vulnerability",
                                req.headers['alternates'], req.status_code)
-        else:
-            print "not working !"
