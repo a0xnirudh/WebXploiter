@@ -15,8 +15,7 @@ from Modules.A1_injection.host import Host_injection
 
 from Modules.A3_xss.clickjacking import Clickjacking
 
-from Modules.A9_KSV.rangeHeader import rangeHeader
-
+from Modules.A9_cwkv.apache import Apache2_tests
 
 from Modules.loggingManager.logging_manager import LoggingManager
 """For appending the directory path"""
@@ -25,8 +24,8 @@ sys.path.append(abs_path+'/')
 
 __author__ = 'Anirudh Anand <anirudh.anand@owasp.org>'
 
+logger = LoggingManager()
 
-logger=LoggingManager()
 
 class WebXploit():
     def __init__(self):
@@ -43,7 +42,7 @@ class WebXploit():
         self.crlf = Crlf_injection()
         self.host = Host_injection()
 
-        self.rangeHeader = rangeHeader()
+        self.apache = Apache2_tests()
         self.clickjacking = Clickjacking()
 
     def parse_target(self, target):
@@ -66,14 +65,6 @@ class WebXploit():
 
     def execute_random_vulns(self, target):
         self.recon_others.execute_all_func(target)
-
-    def check_range_header(self, target):
-        try:
-            self.rangeHeader.rangeInjection(target)
-        except Exception as e:
-            print("Error occured while running RangeHeader injection.\
-                  Check module log for errors")
-            self.logger.moduler_log
 
     def check_info_disclosure(self):
         try:
@@ -102,7 +93,7 @@ def main():
                         action="store_true")
     parser.add_argument('-A3', help="Test for only XSS Attacks",
                         action="store_true")
-    parser.add_argument('-A9', help="Test for only known software vulnerabilities",
+    parser.add_argument('-A9', help="Test for known software vulnerabilities",
                         action="store_true")
 
     args = parser.parse_args()
@@ -134,7 +125,7 @@ def main():
         webxploit.clickjacking.check_protection(args.u)
 
     if args.A9:
-        webxploit.check_range_header(args.u)
+        webxploit.apache.execute_all_func(webxploit.target_host)
 
 if __name__ == '__main__':
     try:
