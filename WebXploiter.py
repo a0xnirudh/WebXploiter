@@ -111,9 +111,9 @@ def main():
 
     webxploit.launch()
     webxploit.get_headers(args.u)
-    #webxploit.get_cookies(args.u)
-    #webxploit.get_HTTP_methods(args.u)
-    #webxploit.check_info_disclosure()
+    webxploit.get_cookies(args.u)
+    webxploit.get_HTTP_methods(args.u)
+    webxploit.check_info_disclosure()
 
     if args.a:
         args.A1 = True

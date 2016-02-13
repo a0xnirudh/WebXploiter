@@ -46,14 +46,17 @@ class Info_disclosure:
         httplib.HTTPSConnection._http_vsn = 10
         httplib.HTTPSConnection._http_vsn_str = 'HTTP/1.0'
         req = httplib.HTTPSConnection(url)
-        req.request("GET", "/")
-        response = req.getresponse()
-        if response.getheader('location'):
-            location = response.getheader('Location')
-            pieces = location.strip('https://').strip('http://').split('.')
-            if len(pieces) >= 3 and self.hasNumbers(location):
-                self.Print.printer(2, "Internal IP disclosure", location)
-        req.close()
+        try:
+            req.request("GET", "/")
+            response = req.getresponse()
+            if response.getheader('location'):
+                location = response.getheader('Location')
+                pieces = location.strip('https://').strip('http://').split('.')
+                if len(pieces) >= 3 and self.hasNumbers(location):
+                    self.Print.printer(2, "Internal IP disclosure", location)
+                req.close()
+        except Exception as e:
+            pass
 
     def hasNumbers(self, inputString):
         return any(char.isdigit() for char in inputString)

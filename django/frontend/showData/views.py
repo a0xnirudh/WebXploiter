@@ -4,8 +4,12 @@ import json
 
 def index(request):
         fileObj = open("../../Logs/toDisplay",'r')
-        data = json.loads(fileObj.read())
+        vuln = [0, 0, 0, 0]
+        for line in fileObj.readlines():
+            data = json.loads(line)
+            vuln[int(data["Severity"])] += 1
+        #data = json.loads(fileObj.read())
         context = {
-                'latest_question_list':data,
+                'vuln':vuln,
         }
         return render(request,'showData/index.html',context)
