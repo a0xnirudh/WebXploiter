@@ -35,11 +35,11 @@ class Host_injection():
                                        target, req.status_code)
 
         except SSLError as e:
-            self.Print.printer(1, "Host Header injection: Manual check needed",
+            self.Print.printer(-1, "Host Header injection: Manual check needed",
                                target, req.status_code)
 
         except ConnectionError:
-            self.Print.printer(1, "Host Header injection: ConnectionError",
+            self.Print.printer(-1, "Host Header injection: ConnectionError",
                                target, req.status_code)
 
         except Exception as e:

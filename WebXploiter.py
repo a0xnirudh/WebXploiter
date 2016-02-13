@@ -15,6 +15,7 @@ from Modules.A1_injection.host import Host_injection
 
 from Modules.A3_xss.clickjacking import Clickjacking
 
+from Modules.A9_cwkv.wordpress import Wordpress
 from Modules.A9_cwkv.apache import Apache2_tests
 
 from Modules.loggingManager.logging_manager import LoggingManager
@@ -42,8 +43,10 @@ class WebXploit():
         self.crlf = Crlf_injection()
         self.host = Host_injection()
 
-        self.apache = Apache2_tests()
         self.clickjacking = Clickjacking()
+
+        self.apache = Apache2_tests()
+        self.wordpress = Wordpress()
 
     def parse_target(self, target):
         try:
@@ -95,6 +98,8 @@ def main():
                         action="store_true")
     parser.add_argument('-A9', help="Test for known software vulnerabilities",
                         action="store_true")
+    parser.add_argument('-wordpress', help="Testing Wordpress vulnerabilities",
+                        action="store_true")
 
     args = parser.parse_args()
 
@@ -106,9 +111,9 @@ def main():
 
     webxploit.launch()
     webxploit.get_headers(args.u)
-    webxploit.get_cookies(args.u)
-    webxploit.get_HTTP_methods(args.u)
-    webxploit.check_info_disclosure()
+    #webxploit.get_cookies(args.u)
+    #webxploit.get_HTTP_methods(args.u)
+    #webxploit.check_info_disclosure()
 
     if args.a:
         args.A1 = True
@@ -126,6 +131,9 @@ def main():
 
     if args.A9:
         webxploit.apache.execute_all_func(webxploit.target_host)
+
+    if args.wordpress:
+        webxploit.wordpress.execute_all_func(webxploit.target_host)
 
 if __name__ == '__main__':
     try:

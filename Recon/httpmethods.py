@@ -14,7 +14,7 @@ class HTTPMethods():
     def __init__(self):
         self.Print = Print()
         self.logger = LoggingManager()
-        self.verbs = ['GET', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE']
+        self.verbs = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'TRACE']
 
     def test_allowed_methods(self, target):
         for verb in self.verbs:
@@ -22,7 +22,7 @@ class HTTPMethods():
                 req = requests.request(verb, target)
                 print verb, req.status_code, req.reason
                 if verb == 'TRACE' and 'TRACE / HTTP' in req.text:
-                    print colored('Possible Cross Site Tracing vulnerability found', 'red')
+                    self.Print.printer(1, "Cross Site Tracing found", None)
             except requests.exceptions.ConnectionError as e:
                 print("CONNECT :: Connection error occured. Retry using https")
                 self.logger.recon_log(e)

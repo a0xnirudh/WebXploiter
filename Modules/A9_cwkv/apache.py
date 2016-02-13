@@ -56,16 +56,16 @@ class Apache2_tests():
             timer = self.currentTime()-timer
             avgTime = timer+avgTime/2
 
-        if((avgTime/realTime) > 10):
-            self.Print.printer(1, "Apache2 Range Header vulnerability: ", None)
-            self.Print.printer(0, "Response time without range: " + realTime,
-                               None, req.status_code)
-            self.Print.printer(0, "Response time with range: " + avgTime,
-                               None, req.status_code)
+        if((avgTime/realTime) > 5):
+            self.Print.printer(2, "Apache2 Range Header DOS: ", None)
+            # self.Print.printer(0, "Response time without range: " + realTime,
+            #                   None, req.status_code)
+        #    self.Print.printer(0, "Response time with range: " + avgTime,
+        #                       None, req.status_code)
 
     def mod_negotiation(self, target):
         headers = {'Accept': 'webxploiter/test'}
         req = requests.get(target + "/index", headers=headers)
         if req.status_code == 406:
-            self.Print.printer(1, "Apache Mod Negotiation vulnerability",
+            self.Print.printer(2, "Apache Mod Negotiation vulnerability",
                                req.headers['alternates'], req.status_code)

@@ -29,7 +29,7 @@ class Crlf_injection():
                     status = req.status_code
                     if status != 404 and status != 403 and status != 400:
                         poc = "POC: " + target + i
-                        self.Print.printer(1, "CRLF header Injection",
+                        self.Print.printer(3, "CRLF header Injection",
                                            data, status, poc)
         except Exception as e:
             print("Error occured while checking for crlf injection. Check module\

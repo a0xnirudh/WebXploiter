@@ -45,8 +45,8 @@ class Sql_injection():
                 for j in range(0, len(check)):
                     if check[j] in r.text:
                         poc = "POC: " + cookie.name + ": " + cookie.value
-                        self.Print.printer(1, "Error Based SQLi(Cookie Based)",
-                                           data, req.status_code, poc)
+                        self.Print.printer(3, "Error Based SQLi(Cookie Based)",
+                                           None, req.status_code, poc)
                         return
 
     def check_user_agent(self, target):
@@ -54,13 +54,12 @@ class Sql_injection():
         for i in payload.readlines():
             user_agent = {'User-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux' +
                           'x86_64; rv:39.0) Gecko/20100101 Firefox/39.0'}
-            user_agent['User-agent'] += i
-            req = urllib2.Request(target, headers=user_agent)
+            poc = user_agent['User-agent'] + i
+            req = urllib2.Request(target, headers=poc)
             flag = str(urllib2.urlopen(req).read())
             check = ["MySQL server version", "have an error", "SQL syntax"]
             for j in range(0, len(check)):
                 for line in re.finditer(check[j], flag):
-                    print "Possible Attack: \n"
-                    print "Error Based SQL Injection (User-Agent)"
-                    print colored("POC: " + user_agent['User-agent'], "red")
+                    self.Print.printer(3, "Error Based SQLi(User Agent)",
+                                       None, req.status_code, poc)
                     return

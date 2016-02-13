@@ -34,7 +34,7 @@ class Cookies():
             length = len(name)
             length = 25 - length
             data = data + name + ": ".rjust(length) + value
-        self.Print.printer(1, "Cookies: ", data)
+        self.Print.printer(0, "Cookies: ", data)
 
     def base64_check(self, target):
         for name, value in self.cookies:
@@ -43,6 +43,6 @@ class Cookies():
                 length = len(name)
                 length = 25 - length
                 data = name + ": ".rjust(length) + flag
-                self.Print.printer(1, "Base64 Encoded Cookies: (Attention!)", data)
+                self.Print.printer(0, "Base64 Encoded Cookies: (Attention!)", data)
             except binascii.Error as e:
                 continue

@@ -36,12 +36,12 @@ class Headers():
             length = len(name)
             length = 50 - length
             data = data + name + ": ".rjust(length) + value + "\n"
-        self.Print.printer(1, "Response Headers: ", data)
+        self.Print.printer(0, "Response Headers: ", data)
 
     def check_headers(self, target):
         req = requests.head(target)
         print "\n"
-        self.Print.printer(1, "Response header Analysis: ", None)
+        self.Print.printer(0, "Response header Analysis: ", None)
         try:
             xssprotect = req.headers['X-XSS-Protection']
             if xssprotect != '1; mode=block':
