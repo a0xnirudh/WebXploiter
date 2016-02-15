@@ -29,8 +29,8 @@ class Others():
             self.logger.recon_log(e)
         for i in range(0, len(check)):
             for line in re.finditer(check[i], flag):
-                print "======================================================="
-                print "Possible Attack: \n"
-                print "Cross-Site WebSocket Hijacking (CSWSH)"
-                print "Might be handy:  http://ironwasp.org/cswsh.html"
+                print("=======================================================")
+                print("Possible Attack: \n")
+                print("Cross-Site WebSocket Hijacking (CSWSH)")
+                print("Might be handy:  http://ironwasp.org/cswsh.html")
                 return

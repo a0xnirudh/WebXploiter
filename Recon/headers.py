@@ -1,7 +1,7 @@
 import os
 import sys
 import requests
-from urlparse import urlparse
+import  urllib3
 from contextlib import closing
 """For appending the directory path"""
 sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
@@ -40,7 +40,7 @@ class Headers():
 
     def check_headers(self, target):
         req = requests.head(target)
-        print "\n"
+        print("\n")
         self.Print.printer(0, "Response header Analysis: ", None)
         try:
             xssprotect = req.headers['X-XSS-Protection']

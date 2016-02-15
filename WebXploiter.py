@@ -2,7 +2,9 @@ import os
 import sys
 import argparse
 import requests
-from urlparse import urlparse
+#from urllib3.parse import urllib3.parse
+import urllib3
+from Print.printer import Print
 from Recon.cookies import Cookies
 from Recon.headers import Headers
 from Recon.others import Others
@@ -48,14 +50,16 @@ class WebXploit():
         self.apache = Apache2_tests()
         self.wordpress = Wordpress()
 
+        self.Print = Print()
     def parse_target(self, target):
         try:
             self.target_url = target
-            flag = urlparse(target)
+            flag = urllib3.parse(target)
             self.target_host = flag.scheme + "://" + flag.netloc
             self.target_port = flag.port
         except Exception as e:
             self.logger.error_log(e)
+        self.Print.printer(None, self.target_url, None)
 
     def launch(self):
         os.system("toilet -F metal WebXploit - Recon")
@@ -106,7 +110,7 @@ def main():
     webxploit.parse_target(args.u)
 
     if not args.u:
-        print "No URL specified.\npython WebXploiter.py -h for help"
+        print("No URL specified.\npython WebXploiter.py -h for help")
         exit(0)
 
     webxploit.launch()
@@ -138,6 +142,8 @@ def main():
 if __name__ == '__main__':
     try:
         main()
+        while True:
+            print("")
     except Exception as e:
         print("Unhandled error occured. Check error log for details")
         logger.error_log(e)

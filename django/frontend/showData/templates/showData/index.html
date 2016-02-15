@@ -280,7 +280,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard </a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -376,7 +376,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
+                    <h1 class="page-header">{{vuln.Target}}</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -390,7 +390,7 @@
                                     <i class="fa fa-support fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{vuln.0}}</div>
+                                    <div class="huge">{{vuln.Count.0}}</div>
                                     <div>Informational</div>
                                 </div>
                             </div>
@@ -412,7 +412,7 @@
                                     <i class="fa fa-flag fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{vuln.1}}</div>
+                                    <div class="huge">{{vuln.Count.1}}</div>
                                     <div>Low</div>
                                 </div>
                             </div>
@@ -434,7 +434,7 @@
                                     <i class="fa fa-exclamation-triangle fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{vuln.2}}</div>
+                                    <div class="huge">{{vuln.Count.2}}</div>
                                     <div>Medium</div>
                                 </div>
                             </div>
@@ -456,7 +456,7 @@
                                     <i class="fa fa-heartbeat fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{vuln.3}}</div>
+                                    <div class="huge">{{vuln.Count.3}}</div>
                                     <div>Critical</div>
                                 </div>
                             </div>
@@ -1003,16 +1003,16 @@
             element: 'morris-donut-chart',
             data: [{
                 label: "Informational",
-                value: {{vuln.0}}
+                value: {{vuln.Count.0}}
             }, {
                 label: "Low",
-                value: {{vuln.1}}
+                value: {{vuln.Count.1}}
             }, {
                 label: "Medium",
-                value: {{vuln.2}}
+                value: {{vuln.Count.2}}
             }, {
                   label: "Critical",
-                  value: {{vuln.3}}
+                  value: {{vuln.Count.3}}
             }],
             resize: true
         });

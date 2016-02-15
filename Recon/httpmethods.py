@@ -20,7 +20,7 @@ class HTTPMethods():
         for verb in self.verbs:
             try:
                 req = requests.request(verb, target)
-                print verb, req.status_code, req.reason
+                print(verb, req.status_code, req.reason)
                 if verb == 'TRACE' and 'TRACE / HTTP' in req.text:
                     self.Print.printer(1, "Cross Site Tracing found", None)
             except requests.exceptions.ConnectionError as e:

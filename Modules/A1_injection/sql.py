@@ -1,7 +1,7 @@
 import os
 import re
 import sys
-import urllib2
+import urllib.request
 import requests
 """For appending the directory path"""
 sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
@@ -55,8 +55,8 @@ class Sql_injection():
             user_agent = {'User-agent': 'Mozilla/5.0 (X11; Ubuntu; Linux' +
                           'x86_64; rv:39.0) Gecko/20100101 Firefox/39.0'}
             user_agent['User-agent'] += i
-            req = urllib2.Request(target, headers=user_agent)
-            flag = str(urllib2.urlopen(req).read())
+            req = urllib.request.Request(target, headers=user_agent)
+            flag = str(urllib.request.urlopen(req).read())
             check = ["MySQL server version", "have an error", "SQL syntax"]
             for j in range(0, len(check)):
                 for line in re.finditer(check[j], flag):
