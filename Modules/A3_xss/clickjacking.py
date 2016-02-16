@@ -13,16 +13,16 @@ class Clickjacking():
         req = requests.get(target)
         try:
             xframe = req.headers['x-frame-options']
-            print '\nX-FRAME-OPTIONS:', xframe, ' - Clickjacking not possible'
+            print('\nX-FRAME-OPTIONS:', xframe, ' - Clickjacking not possible')
         except:
-            print "\n======================================================="
-            print "Possible Attack: \n"
-            print "ClickJacking: \n"
-            print colored('X-FRAME-OPTIONS is missing !', 'red')
+            print("\n=======================================================")
+            print("Possible Attack: \n")
+            print("ClickJacking: \n")
+            print(colored('X-FRAME-OPTIONS is missing !', 'red'))
             self.break_protection(target)
 
     def break_protection(self, target):
-        print '\nAttempting ClickJacking... \n'
+        print('\nAttempting ClickJacking... \n')
         html = '''
         <html>
         <body>
@@ -42,14 +42,14 @@ class Clickjacking():
             page, resources = session.open(html_filename)
             l = open(log_filename, 'r')
             if 'forbidden by X-Frame-Options.' in l.read():
-                print 'Clickjacking mitigated via X-FRAME-OPTIONS'
+                print('Clickjacking mitigated via X-FRAME-OPTIONS')
             else:
                 href = session.evaluate('document.location.href')[0]
             if html_filename not in href:
-                print 'Frame busting detected'
+                print('Frame busting detected')
             else:
-                print colored('Frame busting not detected, page is likely ' +
-                              'vulnerable to ClickJacking', 'red')
+                print(colored('Frame busting not detected, page is likely ' +
+                              'vulnerable to ClickJacking', 'red'))
             l.close()
             logging.getLogger('ghost').handlers[0].close()
             os.unlink(log_filename)

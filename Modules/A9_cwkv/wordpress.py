@@ -36,7 +36,7 @@ class Wordpress():
                 author = req.headers['location'].split('author/')[1].strip('/')
                 authors_list.append(author)
             else:
-                print "Wordpress Users Enumerated \n"
+                print("Wordpress Users Enumerated \n")
                 for i in authors_list:
                     print i
                 break
