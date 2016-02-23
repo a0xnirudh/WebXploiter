@@ -2,20 +2,17 @@ import os
 import sys
 import argparse
 import requests
-#from urllib3.parse import urllib3.parse
-import urllib3
+from urllib.parse import urlparse
 from Print.printer import Print
 from Recon.cookies import Cookies
 from Recon.headers import Headers
 from Recon.others import Others
 from Recon.httpmethods import HTTPMethods
-from Recon.info_disclosure import Info_disclosure
 
 from Modules.A1_injection.sql import Sql_injection
 from Modules.A1_injection.crlf import Crlf_injection
 from Modules.A1_injection.host import Host_injection
 
-from Modules.A3_xss.clickjacking import Clickjacking
 
 from Modules.A9_cwkv.wordpress import Wordpress
 from Modules.A9_cwkv.apache import Apache2_tests
@@ -34,28 +31,29 @@ class WebXploit():
     def __init__(self):
         self.target_url = ""
         self.target_port = ""
+        self.target_host = ""
         self.logger = logger
         self.recon_headers = Headers()
         self.recon_cookies = Cookies()
         self.recon_methods = HTTPMethods()
         self.recon_others = Others()
-        self.recon_info_dis = Info_disclosure()
 
         self.sql = Sql_injection()
         self.crlf = Crlf_injection()
         self.host = Host_injection()
 
-        self.clickjacking = Clickjacking()
 
         self.apache = Apache2_tests()
         self.wordpress = Wordpress()
 
         self.Print = Print()
+
     def parse_target(self, target):
         try:
             self.target_url = target
-            flag = urllib3.parse(target)
+            flag = urlparse(target)
             self.target_host = flag.scheme + "://" + flag.netloc
+            print("Target"+str(self.target_host))
             self.target_port = flag.port
         except Exception as e:
             self.logger.error_log(e)
@@ -72,16 +70,6 @@ class WebXploit():
 
     def execute_random_vulns(self, target):
         self.recon_others.execute_all_func(target)
-
-    def check_info_disclosure(self):
-        try:
-            self.recon_info_dis.check(self.target_host)
-        except Exception as e:
-            print("Error while checking information disclosure.Check module log\
-                  ")
-            self.logger.module_log(e)
-        if self.target_host != self.target_url:
-            self.recon_info_dis.check(self.target_url)
 
     def get_HTTP_methods(self, target):
         self.recon_methods.test_allowed_methods(target)
@@ -117,7 +105,6 @@ def main():
     webxploit.get_headers(args.u)
     webxploit.get_cookies(args.u)
     webxploit.get_HTTP_methods(args.u)
-    webxploit.check_info_disclosure()
 
     if args.a:
         args.A1 = True
@@ -130,9 +117,6 @@ def main():
         webxploit.crlf.test_crlf_injection(args.u)
         webxploit.host.host_header_inj(args.u)
 
-    if args.A3:
-        webxploit.clickjacking.check_protection(args.u)
-
     if args.A9:
         webxploit.apache.execute_all_func(webxploit.target_host)
 
@@ -142,8 +126,6 @@ def main():
 if __name__ == '__main__':
     try:
         main()
-        while True:
-            print("")
     except Exception as e:
         print("Unhandled error occured. Check error log for details")
         logger.error_log(e)

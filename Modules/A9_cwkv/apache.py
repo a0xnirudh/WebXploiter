@@ -2,7 +2,6 @@ import os
 import sys
 import requests
 import time
-from ghost import Ghost
 from requests.exceptions import SSLError, ConnectionError
 """For appending the directory path"""
 sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),

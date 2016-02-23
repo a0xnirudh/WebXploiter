@@ -23,7 +23,7 @@ class Wordpress():
         flag = 1
         while True:
             url = target + "?author=" + str(flag)
-            print url
+            print(url)
             flag = flag + 1
             req = requests.get(url, allow_redirects=False)
             try:
@@ -38,5 +38,5 @@ class Wordpress():
             else:
                 print("Wordpress Users Enumerated \n")
                 for i in authors_list:
-                    print i
+                    print(i)
                 break

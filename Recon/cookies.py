@@ -39,7 +39,7 @@ class Cookies():
     def base64_check(self, target):
         for name, value in self.cookies:
             try:
-                flag = base64.decodestring(value.replace("%3D", "="))
+                flag = base64.decodestring(value.replace("%3D", "=").encode("ascii")).decode("cp437") 
                 length = len(name)
                 length = 25 - length
                 data = name + ": ".rjust(length) + flag
