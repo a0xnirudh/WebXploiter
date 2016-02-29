@@ -31,6 +31,8 @@ class Print():
             '''
         if name:
             (Print.jsonData[Print.count])["Name"] = str(name)
+
+    def writeFile(self):
         fileObj = open(os.path.join(os.path.abspath(os.path.dirname(__file__)),'../Logs/toDisplay'),'a')
         fileObj.write(json.dumps(Print.jsonData))
         fileObj.write("\n")

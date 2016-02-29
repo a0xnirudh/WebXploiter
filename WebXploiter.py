@@ -123,6 +123,8 @@ def main():
     if args.wordpress:
         webxploit.wordpress.execute_all_func(webxploit.target_host)
 
+    webxploit.Print.writeFile()
+
 if __name__ == '__main__':
     try:
         main()

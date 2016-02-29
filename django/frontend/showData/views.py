@@ -6,19 +6,21 @@ import sys
 abs_path = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(abs_path+'/../../../')
 from Print.printer import Print
-from Modules.A1_injection.sql import Sql_injection
+from WebXploiter import WebXploit
 
 
 def index(request):
-        #fileObj = open("../../Logs/toDisplay", 'r')
-        sql = Sql_injection()
-        sql.execute_all_func("http://127.0.0.1/challenge.php")
+        webxploit = WebXploit()
+        webxploit.recon_others.execute_all_func("http://127.0.0.1/challenge.php")
+        webxploit.sql.execute_all_func("http://127.0.0.1/challenge.php")
+        webxploit.crlf.test_crlf_injection("http://127.0.0.1/challenge.php")
+        webxploit.host.host_header_inj("http://127.0.0.1/challenge.php")
         vuln = {}
         vuln["Count"] = [0, 0, 0, 0]
-        vuln["Target"] = (Print.jsonData[0])["Name"]
-        for data in Print.jsonData[1:]:
+        for _, data in Print.jsonData.items():
             (vuln["Count"])[int(data["Severity"])] += 1
         context = {
                 'vuln': vuln,
         }
+        Print.jsonData = {}
         return render(request, 'showData/index.html', context)
